@@ -3,3 +3,5 @@ Library/
 Temp/
 Executable/
 FAWsim.zip
+*.zip
+SimulatorMAC.app/
