@@ -1,3 +1,5 @@
 Library/
 *.meta
 Temp/
+Executable/
+FAWsim.zip

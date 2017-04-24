@@ -5,4 +5,5 @@ Flight attendant simulator for Computer Audio class.
 Run the "Name" scene. Your performance is automatically logged into a "Records" folder in the form of JSONs.
 
 # How do I run the program?
-Run Simulator.exe
+Download it from: https://mothgarden.itch.io/fawsim
+Unzip it and run the .exe
