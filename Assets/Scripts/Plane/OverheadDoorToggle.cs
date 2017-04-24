@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class OverheadDoorToggle : MonoBehaviour {
+
     [SerializeField]
     private MeshRenderer mesh;
 
@@ -17,6 +18,13 @@ public class OverheadDoorToggle : MonoBehaviour {
     private OverheadLocator locator;
 
     private Coroutine routine;
+    private static int timesOperated;
+
+    public static int TimesOperated {
+        get {
+            return timesOperated;
+        }
+    }
 
     public bool IsOpen {
         get {
@@ -39,6 +47,10 @@ public class OverheadDoorToggle : MonoBehaviour {
         }
     }
 
+    private void Start() {
+        timesOperated = 0;
+    }
+
     // Update is called once per frame
     private void Update() {
         Ray ray = cam.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
@@ -47,7 +59,7 @@ public class OverheadDoorToggle : MonoBehaviour {
             && Physics.Raycast(ray, out hit, maxDistance: 50)
             && hit.transform.gameObject == mesh.gameObject) {
             mesh.enabled = !mesh.enabled;
-
+            timesOperated++;
             if (!HasItem) {
                 GameObject.Find("HudText").GetComponent<Text>().text = "You found the empty bin!\nExiting scenario...";
                 LeaveScene();
@@ -62,8 +74,16 @@ public class OverheadDoorToggle : MonoBehaviour {
     }
 
     private IEnumerator LeaveSceneRoutine() {
+        PlayerStats.Instance.ScenarioStats.Add(
+            new ScenarioStats(
+                ScenarioData.Instance.ScenarioName,
+                TimesOperated,
+                OverheadSound.TimesPlayed,
+                Time.timeSinceLevelLoad,
+                ScenarioData.Instance.IsWearableEnabled
+                )
+            );
         yield return new WaitForSeconds(2);
-        // TODO STOP STOPWATCH AND SAVE
         SceneManager.LoadScene("Menu");
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class OverheadSound : MonoBehaviour {
+    private static int timesPlayed;
 
     [SerializeField]
     AudioSource source;
@@ -9,6 +10,12 @@ public class OverheadSound : MonoBehaviour {
     private Coroutine routine;
 
     private bool isPlaying;
+
+    public static int TimesPlayed {
+        get {
+            return timesPlayed;
+        }
+    }
 
     public bool IsPlaying {
         get {
@@ -18,8 +25,13 @@ public class OverheadSound : MonoBehaviour {
 
     public void Play(params AudioClip[] clips) {
         if (!isPlaying) {
+            timesPlayed++;
             StartCoroutine(PlaySounds(clips));
         }
+    }
+
+    public void Start() {
+        timesPlayed = 0;
     }
 
     public void Stop() {

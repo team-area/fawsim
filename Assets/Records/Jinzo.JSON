@@ -1,0 +1,19 @@
+{
+    "Name": "Jinzo",
+    "ScenarioStats": [
+        {
+            "ScenarioName": "One",
+            "BinsOpened": 1,
+            "WearableCalls": 4,
+            "SecondsElapsed": 6.297017574310303,
+            "IsWearableEnabled": true
+        },
+        {
+            "ScenarioName": "One",
+            "BinsOpened": 17,
+            "WearableCalls": 1,
+            "SecondsElapsed": 4.817193508148193,
+            "IsWearableEnabled": true
+        }
+    ]
+}

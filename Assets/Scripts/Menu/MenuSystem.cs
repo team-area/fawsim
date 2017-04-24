@@ -6,8 +6,6 @@ public class MenuSystem : MonoBehaviour {
     [SerializeField]
     private Text hud;
     [SerializeField]
-    private ScenarioData sd;
-    [SerializeField]
     private WearableToggle wearableToggle;
     [SerializeField]
     private ScenarioSelector scenario1Selector;
@@ -20,10 +18,11 @@ public class MenuSystem : MonoBehaviour {
 
     private void Start() {
         nameData = GameObject.Find("NameData").GetComponent<NameData>();
-        Debug.Log("Hello " + nameData.Username);
-    }
-
-    private void Update() {
-
+        PlayerStats.Instance.Name = nameData.Username;
+        string directoryPath = string.Format("{0}/{1}", Application.dataPath, "Records");
+        System.IO.Directory.CreateDirectory(directoryPath);
+        System.IO.File.WriteAllText(
+            directoryPath + "/" + PlayerStats.Instance.Name + ".JSON",
+            JsonUtility.ToJson(PlayerStats.Instance, true));
     }
 }
