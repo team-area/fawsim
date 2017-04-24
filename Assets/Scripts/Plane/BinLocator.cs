@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class BinLocator : MonoBehaviour {
+    [SerializeField]
+    private Transform playerPos;
 
     [SerializeField]
     private GameObject left;
@@ -23,31 +25,41 @@ public class BinLocator : MonoBehaviour {
 
     private OverheadLocator emptyBin;
 
-    private bool isWearableEnabled;
-
-    public bool IsWearableEnabled {
-        set {
-            isWearableEnabled = value;
-        }
-    }
-
     public void Start() {
         dict = new Dictionary<string, OverheadLocator>();
         SetupRow(left, 'A');
         SetupRow(right, 'B');
 
-        ScenarioData sd = GameObject.Find("ScenarioData").GetComponent<ScenarioData>();
-        Init(sd.BinToNotHaveItem);
+        ScenarioData sd = ScenarioData.Instance;
+        Init(sd);
     }
 
-    public void Init(BinType binNumber) {
+    public void Init(ScenarioData sd) {
+        string s = sd.BinToNotHaveItem.ToString();
+        emptyBin = dict[s];
+
         emptyBin.gameObject.GetComponent<OverheadDoorToggle>().HasItem = false;
 
-        if (isWearableEnabled) {
-            string s = binNumber.ToString();
-            emptyBin = dict[s];
+        if (sd.IsWearableEnabled) {
             emptyBin.StartRoutine();
         }
+        float amount = 0;
+        switch (sd.PlayerStartPos) {
+            case StartPosition.FRONT:
+                amount = 1950;
+                break;
+            case StartPosition.MIDDLE:
+                amount = 1000;
+                break;
+            case StartPosition.BACK:
+                amount = 20;
+                break;
+        }
+
+        if (!sd.IsFacingFront) {
+            GameObject.Find("Person").GetComponent<Transform>().rotation = new Quaternion(0, -90, 0, 0);
+        }
+        GameObject.Find("Person").GetComponent<Transform>().position = new Vector3(amount, 64, 100);
     }
 
     public void SetupRow(GameObject row, char letter) {
@@ -74,7 +86,7 @@ public class BinLocator : MonoBehaviour {
     }
 
     private void Update() {
-        if (emptyBin != null && Input.GetKeyDown(KeyCode.Mouse1)) {
+        if (emptyBin != null && ScenarioData.Instance.IsWearableEnabled && Input.GetKeyDown(KeyCode.Mouse1)) {
             emptyBin.StartRoutine();
         }
     }

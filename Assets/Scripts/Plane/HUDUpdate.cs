@@ -9,7 +9,7 @@ public class HUDUpdate : MonoBehaviour {
 
     // Use this for initialization
     private void Start() {
-        ScenarioData sd = GameObject.Find("ScenarioData").GetComponent<ScenarioData>();
+        ScenarioData sd = ScenarioData.Instance;
         text.text = string.Format("Scenario={0} | Wearable={1}", sd.ScenarioName, sd.IsWearableEnabled);
     }
 }

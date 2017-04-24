@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class OverheadDoorToggle : MonoBehaviour {
@@ -55,14 +56,14 @@ public class OverheadDoorToggle : MonoBehaviour {
     }
 
     private void LeaveScene() {
-        if (routine != null) {
+        if (routine == null) {
             routine = StartCoroutine(LeaveSceneRoutine());
         }
     }
 
     private IEnumerator LeaveSceneRoutine() {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(2);
         // TODO STOP STOPWATCH AND SAVE
-        //Application.LoadLevel();
+        SceneManager.LoadScene("Menu");
     }
 }

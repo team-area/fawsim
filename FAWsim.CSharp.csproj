@@ -69,13 +69,21 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\BinLocator.cs" />
-    <Compile Include="Assets\Scripts\BinType.cs" />
-    <Compile Include="Assets\Scripts\HUDUpdate.cs" />
-    <Compile Include="Assets\Scripts\OverheadDoorToggle.cs" />
-    <Compile Include="Assets\Scripts\OverheadLocator.cs" />
-    <Compile Include="Assets\Scripts\OverheadSound.cs" />
-    <Compile Include="Assets\Scripts\ScenarioData.cs" />
+    <Compile Include="Assets\Scripts\Menu\MenuSystem.cs" />
+    <Compile Include="Assets\Scripts\Menu\PlayerStats.cs" />
+    <Compile Include="Assets\Scripts\Menu\ScenarioSelector.cs" />
+    <Compile Include="Assets\Scripts\Menu\ScenarioStats.cs" />
+    <Compile Include="Assets\Scripts\Menu\WearableToggle.cs" />
+    <Compile Include="Assets\Scripts\Name\NameData.cs" />
+    <Compile Include="Assets\Scripts\Name\NameSystem.cs" />
+    <Compile Include="Assets\Scripts\Plane\BinLocator.cs" />
+    <Compile Include="Assets\Scripts\Plane\BinType.cs" />
+    <Compile Include="Assets\Scripts\Plane\HUDUpdate.cs" />
+    <Compile Include="Assets\Scripts\Plane\OverheadDoorToggle.cs" />
+    <Compile Include="Assets\Scripts\Plane\OverheadLocator.cs" />
+    <Compile Include="Assets\Scripts\Plane\OverheadSound.cs" />
+    <Compile Include="Assets\Scripts\Plane\ScenarioData.cs" />
+    <Compile Include="Assets\Scripts\Plane\StartPosition.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Standard Assets\Cameras\CameraGuidelines.txt" />
