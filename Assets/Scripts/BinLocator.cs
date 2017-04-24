@@ -21,12 +21,33 @@ public class BinLocator : MonoBehaviour {
 
     private IDictionary<string, OverheadLocator> dict;
 
+    private OverheadLocator emptyBin;
+
+    private bool isWearableEnabled;
+
+    public bool IsWearableEnabled {
+        set {
+            isWearableEnabled = value;
+        }
+    }
+
     public void Start() {
         dict = new Dictionary<string, OverheadLocator>();
         SetupRow(left, 'A');
         SetupRow(right, 'B');
 
-        dict["A13"].StartRoutine();
+        ScenarioData sd = GameObject.Find("ScenarioData").GetComponent<ScenarioData>();
+        Init(sd.BinToNotHaveItem);
+    }
+
+    public void Init(BinType binNumber) {
+        emptyBin.gameObject.GetComponent<OverheadDoorToggle>().HasItem = false;
+
+        if (isWearableEnabled) {
+            string s = binNumber.ToString();
+            emptyBin = dict[s];
+            emptyBin.StartRoutine();
+        }
     }
 
     public void SetupRow(GameObject row, char letter) {
@@ -49,6 +70,12 @@ public class BinLocator : MonoBehaviour {
             locators[i].location = clip;
 
             dict.Add(num, locators[i]);
+        }
+    }
+
+    private void Update() {
+        if (emptyBin != null && Input.GetKeyDown(KeyCode.Mouse1)) {
+            emptyBin.StartRoutine();
         }
     }
 }

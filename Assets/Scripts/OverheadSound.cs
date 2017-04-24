@@ -17,24 +17,23 @@ public class OverheadSound : MonoBehaviour {
     }
 
     public void Play(params AudioClip[] clips) {
-        if (routine != null) {
-            StopCoroutine(routine);
+        if (!isPlaying) {
+            StartCoroutine(PlaySounds(clips));
         }
-        isPlaying = true;
-        StartCoroutine(PlaySounds(clips));
     }
 
     public void Stop() {
         StopCoroutine(routine);
-        isPlaying = false;
     }
 
     private IEnumerator PlaySounds(AudioClip[] clips) {
+        isPlaying = true;
         foreach (AudioClip clip in clips) {
             source.PlayOneShot(clip);
             while (source.isPlaying) {
                 yield return null;
             }
         }
+        isPlaying = false;
     }
 }

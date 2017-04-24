@@ -70,9 +70,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\BinLocator.cs" />
+    <Compile Include="Assets\Scripts\BinType.cs" />
+    <Compile Include="Assets\Scripts\HUDUpdate.cs" />
     <Compile Include="Assets\Scripts\OverheadDoorToggle.cs" />
     <Compile Include="Assets\Scripts\OverheadLocator.cs" />
     <Compile Include="Assets\Scripts\OverheadSound.cs" />
+    <Compile Include="Assets\Scripts\ScenarioData.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Standard Assets\Cameras\CameraGuidelines.txt" />

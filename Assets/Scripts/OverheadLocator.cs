@@ -28,25 +28,12 @@ public class OverheadLocator : MonoBehaviour {
     }
 
     public void StartRoutine() {
-        if (routine != null) {
-            StopCoroutine(routine);
-        }
-        routine = StartCoroutine(LoopSound(soundInterval, ping, location));
+        sound.Play(ping, location);
     }
 
     public void StopRoutine() {
-        StopCoroutine(routine);
-    }
-
-    private IEnumerator LoopSound(float interval, params AudioClip[] clips) {
-        isRunning = true;
-        float timer = 0;
-        while (true) {
-            if (!sound.IsPlaying && (timer += Time.deltaTime) > soundInterval) {
-                sound.Play(clips);
-                timer = 0;
-            }
-            yield return null;
+        if (routine != null) {
+            StopCoroutine(routine);
         }
     }
 }
